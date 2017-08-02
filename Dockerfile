@@ -5,7 +5,7 @@ ENV FRIENDICA_VERSION 3.5.2
 ENV ADDONS_VERSION 3.5.2
 
 RUN apk update && apk add php5-mysqli php5-fpm git curl php5-gd php5-mcrypt php5-xml php5-iconv php5-openssl php5-dom dcron php5-curl \
-    php5-imagick openssl php5-json php5-ctype && \
+    php5-imagick openssl php5-json php5-ctype php5-posix && \
     rm /usr/share/nginx/html/*
 RUN git clone https://github.com/friendica/friendica.git /usr/share/nginx/html/ && rm /usr/share/nginx/html/.git* -rf
 RUN git clone https://github.com/friendica/friendica-addons.git /usr/share/nginx/html/addon/ && rm /usr/share/nginx/html/addon/.git* -rf
