@@ -7,6 +7,7 @@ else
     echo "php_admin_value[sendmail_path] = /usr/sbin/sendmail -S ${SMTP_HOST}:${SMTP_PORT} -au${SMTP_USER} -ap${SMTP_PASS} -t -i" >> /etc/php5/fpm.d/sendmail.conf
 fi
 
+sed -i "s/localhost/${SERVER_NAME}/g" /etc/nginx/conf.d/default.conf
 crond -b
 /usr/bin/php-fpm5
 nginx -c /etc/nginx/nginx.conf
