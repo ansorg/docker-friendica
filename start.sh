@@ -1,10 +1,10 @@
 #!/bin/sh
 
-echo "[www]" > /etc/php5/fpm.d/sendmail.conf
+echo "[www]" > /etc/php5/conf.d/sendmail.ini
 if [ "${SMTP_SSL}" == "y" ]; then
-    echo "php_admin_value[sendmail_path] = /usr/sbin/sendmail -H 'exec openssl s_client -quiet -tls1 -connect ${SMTP_HOST}:${SMTP_PORT}' -au${SMTP_USER} -ap${SMTP_PASS} -t -i" >> /etc/php5/fpm.d/sendmail.conf
+    echo "sendmail_path = /usr/sbin/sendmail -H 'exec openssl s_client -quiet -tls1 -connect ${SMTP_HOST}:${SMTP_PORT}' -au${SMTP_USER} -ap${SMTP_PASS} -t -i" >> /etc/php5/conf.d/sendmail.ini
 else
-    echo "php_admin_value[sendmail_path] = /usr/sbin/sendmail -S ${SMTP_HOST}:${SMTP_PORT} -au${SMTP_USER} -ap${SMTP_PASS} -t -i" >> /etc/php5/fpm.d/sendmail.conf
+    echo "sendmail_path = /usr/sbin/sendmail -S ${SMTP_HOST}:${SMTP_PORT} -au${SMTP_USER} -ap${SMTP_PASS} -t -i" >> /etc/php5/conf.d/sendmail.ini
 fi
 
 sed -i "s/localhost/${SERVER_NAME}/g" /etc/nginx/conf.d/default.conf
